@@ -9,13 +9,13 @@ const defaultEquals = (a, b) => {
 };
 
 class ListNode {
-  constructor(val) {
+  constructor(val, next = null) {
     if (val instanceof ListNode) {
       this.val = val.val;
     } else {
       this.val = val;
     }
-    this.next = null;
+    this.next = next;
   }
 }
 
@@ -36,18 +36,17 @@ class LinkedList {
     return this;
   }
   insert(index, element) {
-    const node = new ListNode(element);
     if (index < 0 || index > this.count) {
       return this;
     }
     const curNode = this.getElementAt(index);
+    const node = new ListNode(element, curNode);
     if (index === 0) {
       this.head = node;
     } else {
       const preNode = this.getElementAt(index - 1);
       preNode.next = node;
     }
-    node.next = curNode;
     this.count += 1;
     return this;
   }
