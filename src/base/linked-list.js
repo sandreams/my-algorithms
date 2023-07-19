@@ -4,124 +4,124 @@
  * @param {ListNode} b
  * @return {boolean}
  */
-const defaultEquals = (a, b) => {
-  return a.val === b.val;
-};
+const defaultEqualFn = (a, b) => {
+  return a.val === b.val
+}
 
 class ListNode {
   constructor(val, next = null) {
     if (val instanceof ListNode) {
-      this.val = val.val;
+      this.val = val.val
     } else {
-      this.val = val;
+      this.val = val
     }
-    this.next = next;
+    this.next = next
   }
 }
 
 class LinkedList {
-  constructor(equalFn = defaultEquals) {
-    this.count = 0;
-    this.head = null;
-    this.equalFn = equalFn;
+  constructor(equalFn = defaultEqualFn) {
+    this.count = 0
+    this.head = null
+    this.equalFn = equalFn
   }
   push(element) {
-    const node = new ListNode(element);
+    const node = new ListNode(element)
     if (!this.head) {
-      this.head = node;
+      this.head = node
     } else {
-      this.getLast().next = node;
+      this.getLast().next = node
     }
-    this.count += 1;
-    return this;
+    this.count += 1
+    return this
   }
   insert(index, element) {
     if (index < 0 || index > this.count) {
-      return this;
+      return this
     }
-    const curNode = this.getElementAt(index);
-    const node = new ListNode(element, curNode);
+    const curNode = this.getElementAt(index)
+    const node = new ListNode(element, curNode)
     if (index === 0) {
-      this.head = node;
+      this.head = node
     } else {
-      const preNode = this.getElementAt(index - 1);
-      preNode.next = node;
+      const preNode = this.getElementAt(index - 1)
+      preNode.next = node
     }
-    this.count += 1;
-    return this;
+    this.count += 1
+    return this
   }
   getElementAt(index) {
     if (Math.abs(index) > this.count) {
-      return null;
+      return null
     }
-    const endIndex = index >= 0 ? index : this.count + index;
-    let node = this.head;
+    const endIndex = index >= 0 ? index : this.count + index
+    let node = this.head
     for (let i = 0; i < endIndex; i++) {
-      node = node.next;
+      node = node.next
     }
-    return node;
+    return node
   }
   getLast() {
-    return this.getElementAt(-1);
+    return this.getElementAt(-1)
   }
   remove(element) {
-    const index = this.indexOf(element);
+    const index = this.indexOf(element)
     if (index >= 0) {
-      this.removeAt(index);
+      this.removeAt(index)
     }
-    return this;
+    return this
   }
   removeAt(index) {
-    const delNode = this.getElementAt(index);
+    const delNode = this.getElementAt(index)
     if (delNode) {
       if (index === 0) {
-        this.head = delNode.next;
+        this.head = delNode.next
       } else {
-        const preNode = this.getElementAt(index - 1);
-        preNode.next = delNode.next;
+        const preNode = this.getElementAt(index - 1)
+        preNode.next = delNode.next
       }
-      this.count--;
+      this.count--
     }
-    return this;
+    return this
   }
   indexOf(element) {
-    const node = new ListNode(element);
-    let current = this.head;
+    const node = new ListNode(element)
+    let current = this.head
     for (let i = 0; i < this.count && current !== null; i++) {
       if (this.equalFn(node, current) === true) {
-        return i;
+        return i
       }
-      current = current.next;
+      current = current.next
     }
-    return -1;
+    return -1
   }
   isEmpty() {
-    return this.count <= 0;
+    return this.count <= 0
   }
   size() {
-    return this.count;
+    return this.count
   }
   getHead() {
-    return this.head;
+    return this.head
   }
   print() {
-    let current = this.head;
-    let printText = 'head-->';
+    let current = this.head
+    let printText = 'head-->'
     while (current) {
-      printText += `${current.val}-->`;
-      current = current.next;
+      printText += `${current.val}-->`
+      current = current.next
     }
     if (!this.head) {
-      printText += 'null';
+      printText += 'null'
     } else {
-      printText = printText.substring(0, printText.length - 3);
+      printText = printText.substring(0, printText.length - 3)
     }
-    console.log(printText);
-    return printText;
+    console.log(printText)
+    return printText
   }
 }
 
 module.exports = {
   LinkedList,
   ListNode,
-};
+}
