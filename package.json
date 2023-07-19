@@ -1,0 +1,13 @@
+{
+  "name": "algorithms",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "wan <fs517010856@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest --config jest.config.js --runInBand"
+  },
+  "devDependencies": {
+    "jest": "^29.6.1"
+  }
+}

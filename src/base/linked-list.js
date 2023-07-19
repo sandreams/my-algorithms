@@ -1,5 +1,11 @@
+/**
+ * @description:
+ * @param {ListNode} a
+ * @param {ListNode} b
+ * @return {boolean}
+ */
 const defaultEquals = (a, b) => {
-  return a === b;
+  return a.val === b.val;
 };
 
 class ListNode {
@@ -75,13 +81,15 @@ class LinkedList {
         const preNode = this.getElementAt(index - 1);
         preNode.next = delNode.next;
       }
+      this.count--;
     }
     return this;
   }
   indexOf(element) {
+    const node = new ListNode(element);
     let current = this.head;
     for (let i = 0; i < this.count && current !== null; i++) {
-      if (this.equalFn(element, current.val)) {
+      if (this.equalFn(node, current) === true) {
         return i;
       }
       current = current.next;
@@ -110,5 +118,11 @@ class LinkedList {
       printText = printText.substring(0, printText.length - 3);
     }
     console.log(printText);
+    return printText;
   }
 }
+
+module.exports = {
+  LinkedList,
+  ListNode,
+};

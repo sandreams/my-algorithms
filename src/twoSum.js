@@ -4,7 +4,7 @@
  * @param {number} target
  * @return {number[]}
  */
-export const twoSum = function (numbers, target) {
+const twoSum = function (numbers, target) {
   let l_pointer = 0;
   let r_pointer = numbers.length - 1;
   let isMatched = false;
@@ -22,3 +22,5 @@ export const twoSum = function (numbers, target) {
   }
   return isMatched ? [l_pointer + 1, r_pointer + 1] : [];
 };
+console.log('twoSum :>> ', twoSum([2, 7, 11, 15], 9));
+module.exports = twoSum;
