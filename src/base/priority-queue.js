@@ -2,7 +2,7 @@
  * @Author: fan
  * @Date: 2023-07-25 16:13:55
  * @LastEditors: fan
- * @LastEditTime: 2023-07-25 16:21:05
+ * @LastEditTime: 2023-07-26 16:08:36
  * @FilePath: \algorithms\src\base\priority-queue.js
  * @Description: JavaScript 实现优先队列
  */
@@ -21,11 +21,10 @@ class QElement {
   }
 }
 
-class PriorityQueue {
+class PriorityQueueByArray {
   constructor() {
     this.queueData = [];
   }
-  // functions to be implemented
   enqueue(element, priority) {
     const qElement = new QElement(element, priority);
     let contain = false;
@@ -74,3 +73,21 @@ class PriorityQueue {
     return printText;
   }
 }
+
+class PriorityQueue {
+  createQueue(implementType = 'array') {
+    switch (implementType) {
+      case 'array':
+        return new PriorityQueueByArray();
+      case 'heap':
+        break;
+      default:
+        throw new Error('Invalid implement type');
+    }
+  }
+}
+
+module.exports = {
+  PriorityQueue,
+  QElement,
+};

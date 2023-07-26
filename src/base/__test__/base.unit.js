@@ -1,5 +1,6 @@
 const { LinkedList, ListNode } = require('../linked-list');
 const { DoublyLinkedList, DoublyNode } = require('../doubly-linked-list');
+const { PriorityQueue, QElement } = require('../priority-queue');
 
 describe('链表测试', () => {
   const ll = new LinkedList();
@@ -78,3 +79,29 @@ describe('双向链表测试', () => {
     expect(dll2.hasCycle()).toBe(false);
   });
 });
+
+describe('优先队列测试1 （数组实现）', () => {
+  const priorityQueue = new PriorityQueue();
+  const q = priorityQueue.createQueue('array');
+  it('入队', () => {
+    q.enqueue(1);
+    q.enqueue(2);
+    q.enqueue(3);
+    q.enqueue(4);
+    q.enqueue(5);
+    q.enqueue(6);
+    q.enqueue(7);
+    q.enqueue(8);
+    q.enqueue(9);
+    q.enqueue(10);
+    const result = q.print();
+    expect(result).toBe('-->1-->2-->3-->4-->5-->6-->7-->8-->9-->10-->');
+  });
+  it('查找最大', () => {
+    const res1 = q.dequeue();
+    const res2 = q.dequeue();
+    expect([res1.element, res2.element]).toEqual([10, 9]);
+  });
+});
+
+describe('优先队列测试2 （堆实现）', () => {});
