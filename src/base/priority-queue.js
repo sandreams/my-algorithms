@@ -2,7 +2,7 @@
  * @Author: fan
  * @Date: 2023-07-25 16:13:55
  * @LastEditors: fan
- * @LastEditTime: 2023-07-26 16:08:36
+ * @LastEditTime: 2023-07-27 11:15:44
  * @FilePath: \algorithms\src\base\priority-queue.js
  * @Description: JavaScript 实现优先队列
  */
@@ -73,6 +73,50 @@ class PriorityQueueByArray {
     return printText;
   }
 }
+
+// class PriorityQueueByHeap {
+//   constructor() {
+//     this.heap = [];
+//   }
+//   getLeftChildIndex(parentIndex) {
+//     return 2 * parentIndex + 1;
+//   }
+//   getRightChildIndex(parentIndex) {
+//     return 2 * parentIndex + 2;
+//   }
+//   getParentIndex(childIndex) {
+//     return Math.floor((childIndex - 1) / 2);
+//   }
+//   hasLeftChild(index) {
+//     return this.getLeftChildIndex(index) < this.heap.length;
+//   }
+//   hasRightChild(index) {
+//     return this.getRightChildIndex(index) < this.heap.length;
+//   }
+//   hasParent(index) {
+//     return this.getParentIndex(index) >= 0;
+//   }
+//   leftChild(index) {
+//     return this.heap[this.getLeftChildIndex(index)];
+//   }
+//   RightChild(index) {
+//     return this.heap[this.getRightChildIndex(index)];
+//   }
+//   parent(index) {
+//     return this.heap[this.getParentIndex(index)];
+//   }
+//   swap(indexOne, indexTwo) {
+//     const temp = this.heap[indexOne];
+//     this.heap[indexOne] = this.heap[indexTwo];
+//     this.heap[indexTwo] = temp;
+//   }
+//   peak() {
+//     if (!this.heap.length) {
+//       return null;
+//     }
+//     return this.heap[0];
+//   }
+// }
 
 class PriorityQueue {
   createQueue(implementType = 'array') {
