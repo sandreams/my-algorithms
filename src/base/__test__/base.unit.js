@@ -83,17 +83,17 @@ describe('双向链表测试', () => {
 describe('优先队列测试1 （数组实现）', () => {
   const priorityQueue = new PriorityQueue();
   const q = priorityQueue.createQueue('array');
-  it('入队', () => {
-    q.enqueue(1);
-    q.enqueue(2);
-    q.enqueue(3);
-    q.enqueue(4);
-    q.enqueue(5);
-    q.enqueue(6);
-    q.enqueue(7);
-    q.enqueue(8);
-    q.enqueue(9);
-    q.enqueue(10);
+  it('入队(最大时间)', () => {
+    q.enqueue(1, 1);
+    q.enqueue(2, 2);
+    q.enqueue(3, 3);
+    q.enqueue(4, 4);
+    q.enqueue(5, 5);
+    q.enqueue(6, 6);
+    q.enqueue(7, 7);
+    q.enqueue(8, 8);
+    q.enqueue(9, 9);
+    q.enqueue(10, 10);
     const result = q.print();
     expect(result).toBe('-->1-->2-->3-->4-->5-->6-->7-->8-->9-->10-->');
   });
@@ -102,6 +102,58 @@ describe('优先队列测试1 （数组实现）', () => {
     const res2 = q.dequeue();
     expect([res1.element, res2.element]).toEqual([10, 9]);
   });
+  it('入队(最小时间)', () => {
+    const q2 = priorityQueue.createQueue('array');
+    q2.enqueue(10, 10);
+    q2.enqueue(9, 9);
+    q2.enqueue(8, 8);
+    q2.enqueue(7, 7);
+    q2.enqueue(6, 6);
+    q2.enqueue(5, 5);
+    q2.enqueue(4, 4);
+    q2.enqueue(3, 3);
+    q2.enqueue(2, 2);
+    q2.enqueue(1, 1);
+    const result = q2.print();
+    expect(result).toBe('-->1-->2-->3-->4-->5-->6-->7-->8-->9-->10-->');
+  });
 });
 
-describe('优先队列测试2 （堆实现）', () => {});
+describe('优先队列测试2 （堆实现）', () => {
+  const priorityQueue = new PriorityQueue();
+  const q = priorityQueue.createQueue('heap');
+  it('入队（最大时间）', () => {
+    q.enqueue(1, 1);
+    q.enqueue(2, 2);
+    q.enqueue(3, 3);
+    q.enqueue(4, 4);
+    q.enqueue(5, 5);
+    q.enqueue(6, 6);
+    q.enqueue(7, 7);
+    q.enqueue(8, 8);
+    q.enqueue(9, 9);
+    q.enqueue(10, 10);
+    const result = q.print();
+    expect(result).toBe('-->10-->9-->6-->7-->8-->2-->5-->1-->4-->3-->');
+  });
+  it('查找最大', () => {
+    const res1 = q.dequeue();
+    const res2 = q.dequeue();
+    expect([res1.element, res2.element]).toEqual([10, 9]);
+  });
+  it('入队(最小时间)', () => {
+    const q2 = priorityQueue.createQueue('heap');
+    q2.enqueue(10, 10);
+    q2.enqueue(9, 9);
+    q2.enqueue(8, 8);
+    q2.enqueue(7, 7);
+    q2.enqueue(6, 6);
+    q2.enqueue(5, 5);
+    q2.enqueue(4, 4);
+    q2.enqueue(3, 3);
+    q2.enqueue(2, 2);
+    q2.enqueue(1, 1);
+    const result = q2.print();
+    expect(result).toBe('-->10-->9-->8-->7-->6-->5-->4-->3-->2-->1-->');
+  });
+});
