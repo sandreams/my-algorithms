@@ -53,21 +53,21 @@ class Heap {
     return this.size() === 0 ? null : this.heapData[0];
   }
   push(element) {
-    if (this.siftUp) {
+    if (this.shiftUp) {
       this.heapData.push(element);
       // 调整位置
-      this.siftUp(element, this.size() - 1);
+      this.shiftUp(element, this.size() - 1);
     }
     return this;
   }
   pop() {
-    if (!this.size() || !this.siftDown) {
+    if (!this.size() || !this.shiftDown) {
       return;
     }
     const last = this.heapData.pop();
     if (this.size() !== 0) {
       this.heapData[0] = last;
-      this.siftDown(last, 0);
+      this.shiftDown(last, 0);
     }
   }
 }
@@ -77,7 +77,7 @@ class MinHeap extends Heap {
   constructor(compare) {
     super(compare);
   }
-  siftUp(node, i) {
+  shiftUp(node, i) {
     // i 为比较的起始位置
     let index = i;
     while (index > 0) {
@@ -92,7 +92,7 @@ class MinHeap extends Heap {
       }
     }
   }
-  siftDown(node, i) {
+  shiftDown(node, i) {
     let index = i;
     while (this.hasLeftChild(index)) {
       let smallerChildIndex = this.getLeftChildIndex(index);
@@ -118,7 +118,7 @@ class MaxHeap extends Heap {
   constructor(compare) {
     super(compare);
   }
-  siftUp(node, i) {
+  shiftUp(node, i) {
     // i 为比较的起始位置
     let index = i;
     while (index > 0) {
@@ -133,7 +133,7 @@ class MaxHeap extends Heap {
       }
     }
   }
-  siftDown(node, i) {
+  shiftDown(node, i) {
     let index = i;
     while (this.hasLeftChild(index)) {
       let biggerChildIndex = this.getLeftChildIndex(index);

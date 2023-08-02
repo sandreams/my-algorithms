@@ -1,42 +1,36 @@
 const hasLeftChild = (index, size) => {
-  return 2 * index + 1 < size
-}
-const siftUp = (heap, startIndex) => {
-  let index = startIndex
+  return 2 * index + 1 < size;
+};
+const shiftUp = (heap, startIndex) => {
+  let index = startIndex;
   while (index > 0) {
-    const parentIndex = Math.floor((index - 1) / 2)
+    const parentIndex = Math.floor((index - 1) / 2);
     if (heap[index] < heap[parentIndex]) {
-      ;[heap[index], heap[parentIndex]] = [heap[parentIndex], heap[index]]
+      [heap[index], heap[parentIndex]] = [heap[parentIndex], heap[index]];
     } else {
-      break
+      break;
     }
-    index = parentIndex
+    index = parentIndex;
   }
-}
-const siftDown = (heap, startIndex) => {
-  let index = startIndex
-  const length = heap.length
+};
+const shiftDown = (heap, startIndex) => {
+  let index = startIndex;
+  const length = heap.length;
   while (hasLeftChild(index, length)) {
-    const leftChildIndex = 2 * index + 1
-    let smallerChildIndex = leftChildIndex
-    const rightChildIndex = 2 * index + 2
-    if (
-      rightChildIndex < length &&
-      heap[leftChildIndex] > heap[rightChildIndex]
-    ) {
-      smallerChildIndex = rightChildIndex
+    const leftChildIndex = 2 * index + 1;
+    let smallerChildIndex = leftChildIndex;
+    const rightChildIndex = 2 * index + 2;
+    if (rightChildIndex < length && heap[leftChildIndex] > heap[rightChildIndex]) {
+      smallerChildIndex = rightChildIndex;
     }
     if (heap[index] <= heap[smallerChildIndex]) {
-      break
+      break;
     } else {
-      ;[heap[index], heap[smallerChildIndex]] = [
-        heap[smallerChildIndex],
-        heap[index],
-      ]
+      [heap[index], heap[smallerChildIndex]] = [heap[smallerChildIndex], heap[index]];
     }
-    index = smallerChildIndex
+    index = smallerChildIndex;
   }
-}
+};
 
 /**
  * @description: 返回数组中第 k 个最大的元素
@@ -45,20 +39,20 @@ const siftDown = (heap, startIndex) => {
  * @return {number | null}
  */
 const findKthLargest = function (nums, k) {
-  const heap = []
+  const heap = [];
   for (let i = 0; i < nums.length; i++) {
     // 构建最小堆
     if (i < k) {
-      heap.push(nums[i])
-      siftUp(heap, heap.length - 1)
+      heap.push(nums[i]);
+      shiftUp(heap, heap.length - 1);
     } else {
       if (nums[i] >= heap[0]) {
-        heap[0] = nums[i]
-        siftDown(heap, 0)
+        heap[0] = nums[i];
+        shiftDown(heap, 0);
       }
     }
   }
-  return heap[0] || null
-}
+  return heap[0] || null;
+};
 
-module.exports = findKthLargest
+module.exports = findKthLargest;
