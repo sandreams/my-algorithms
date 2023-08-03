@@ -1,7 +1,7 @@
 const twoSum = require('../twoSum')
 const findLongestWord = require('../findLongestWord')
 const findKthLargest = require('../findKthLargest')
-const topKFrequent = require('../topKFrequent')
+const createTopKFrequent = require('../topKFrequent')
 
 describe('two sum', () => {
   it('输入：numbers = [2,7,11,15], target = 9', () => {
@@ -41,7 +41,8 @@ describe('数组中第 K 大的数', () => {
   })
 })
 
-describe('前 K 个高频元素', () => {
+describe('前 K 个高频元素，小顶堆实现', () => {
+  const topKFrequent = createTopKFrequent('heap')
   it('输入: nums = [1,1,1,2,2,3], k = 2', () => {
     const result = topKFrequent([1, 1, 1, 2, 2, 3], 2)
     // 验证长度
@@ -55,7 +56,35 @@ describe('前 K 个高频元素', () => {
   })
   it('输入: nums = [5,2,5,3,5,3,1,1,3], k = 2', () => {
     const result = topKFrequent([5, 2, 5, 3, 5, 3, 1, 1, 3], 2)
-    console.log('result :>> ', result)
+    // 验证长度
+    expect(result.length).toBe(2)
+    // 验证元素
+    expect(result).toEqual(expect.arrayContaining([3, 5]))
+  })
+  it('输入: nums = [-1,1,4,-4,3,5,4,-2,3,-1], k = 3', () => {
+    const result = topKFrequent([6, 0, 1, 4, 9, 7, -3, 1, -4, -8, 4, -7, -3, 3, 2, -3, 9, 5, -4, 0], 6)
+    // 验证长度
+    expect(result.length).toBe(6)
+    // 验证元素
+    expect(result).toEqual(expect.arrayContaining([-3, -4, 0, 1, 4, 9]))
+  })
+})
+
+describe('前 K 个高频元素，桶排序实现', () => {
+  const topKFrequent = createTopKFrequent('bucket')
+  it('输入: nums = [1,1,1,2,2,3], k = 2', () => {
+    const result = topKFrequent([1, 1, 1, 2, 2, 3], 2)
+    // 验证长度
+    expect(result.length).toBe(2)
+    // 验证元素
+    expect(result).toEqual(expect.arrayContaining([1, 2]))
+  })
+  it('输入: nums = [1], k = 1', () => {
+    const result = topKFrequent([1], 1)
+    expect(result).toEqual([1])
+  })
+  it('输入: nums = [5,2,5,3,5,3,1,1,3], k = 2', () => {
+    const result = topKFrequent([5, 2, 5, 3, 5, 3, 1, 1, 3], 2)
     // 验证长度
     expect(result.length).toBe(2)
     // 验证元素

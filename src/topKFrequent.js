@@ -32,27 +32,22 @@ const shiftDown = (heap) => {
   }
 }
 /**
- * @description: 返回数组 nums 出现频率前 k 高的元素
+ * @description: 返回数组 nums 出现频率前 k 高的元素，小顶堆实现
  * @param {number[]} nums
  * @param {number} k
  * @return {number[]}
  */
-const topKFrequent = (nums, k) => {
-  const bucket = {}
-  for (let i = 0; i < nums.length; i++) {
-    const index = nums[i]
-    if (bucket[index]) {
-      bucket[index] += 1
-    } else {
-      bucket[index] = 1
-    }
+const topKFrequentByMinHeap = (nums, k) => {
+  const map = new Map()
+  for (const num of nums) {
+    map.set(num, (map.get(num) || 0) + 1)
   }
   const q = []
   let loop = 0
-  for (const key in bucket) {
+  for (const [key, v] of map.entries()) {
     const obj = {
       v: Number(key),
-      p: bucket[key],
+      p: v,
     }
     if (loop < k) {
       q.push(obj)
@@ -68,4 +63,57 @@ const topKFrequent = (nums, k) => {
   return q.map((e) => e.v)
 }
 
-module.exports = topKFrequent
+const buckerSort = (map, k) => {
+  const arr = []
+  for (const [k, v] of map.entries()) {
+    if (!arr[v]) {
+      arr[v] = [Number(k)]
+    } else {
+      arr[v].push(Number(k))
+    }
+  }
+  // 对arr进行倒序排序
+  const ret = []
+  for (let i = arr.length - 1; i >= 0 && k > 0; i--) {
+    if (arr[i]) {
+      const length = arr[i].length
+      if (k < length) {
+        ret.push(...arr[i].slice(0, k))
+      } else {
+        ret.push(...arr[i])
+      }
+      k -= length
+    }
+  }
+  return ret
+}
+
+/**
+ * @description: 返回数组 nums 出现频率前 k 高的元素，桶排序实现
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number[]}
+ */
+const topKFrequentByBucketSort = (nums, k) => {
+  const map = new Map()
+  for (const num of nums) {
+    map.set(num, (map.get(num) || 0) + 1)
+  }
+  if (map.size <= k) {
+    return [...map.keys()]
+  }
+  return buckerSort(map, k)
+}
+
+const createTopKFrequent = (implement = 'bucket') => {
+  switch (implement) {
+    case 'bucket':
+      return topKFrequentByBucketSort
+    case 'heap':
+      return topKFrequentByMinHeap
+    default:
+      break
+  }
+}
+
+module.exports = createTopKFrequent
