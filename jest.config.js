@@ -7,8 +7,8 @@ const config = {
       '<rootDir>/test/__mocks__/file-mock.js',
     '\\.(css|less|sass|scss)$': '<rootDir>/test/__mocks__/object-mock.js',
   },
-  testMatch: ['<rootDir>/**/__test__/**/*unit.(js|jsx|ts|tsx)'],
+  testMatch: ['<rootDir>/**/__test__/**/*unit*.(js|jsx|ts|tsx)'],
   verbose: true,
-};
+}
 
-module.exports = config;
+module.exports = config
