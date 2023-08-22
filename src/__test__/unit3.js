@@ -1,5 +1,6 @@
 const findContentChildren = require('../findContentChildren')
 const eraseOverlapIntervals = require('../eraseOverlapIntervals')
+const findMinArrowShots = require('../findMinArrowShots')
 
 describe('贪心策略', () => {
   it('输入: g = [10, 9, 8, 7], s = [5, 6, 7, 8]', () => {
@@ -49,5 +50,37 @@ describe('不重叠区间个数', () => {
     ]
     const result = eraseOverlapIntervals(intervals)
     expect(result).toBe(0)
+  })
+})
+describe('用最少数量的箭引爆气球', () => {
+  it('输入：points = [[10,16],[2,8],[1,6],[7,12]]', () => {
+    const points = [
+      [10, 16],
+      [2, 8],
+      [1, 6],
+      [7, 12],
+    ]
+    const result = findMinArrowShots(points)
+    expect(result).toBe(2)
+  })
+  it('输入：points = [[1,2],[3,4],[5,6],[7,8]]', () => {
+    const points = [
+      [1, 2],
+      [3, 4],
+      [5, 6],
+      [7, 8],
+    ]
+    const result = findMinArrowShots(points)
+    expect(result).toBe(4)
+  })
+  it('输入：points = [[1,2],[2,3],[3,4],[4,5]]', () => {
+    const points = [
+      [1, 2],
+      [2, 3],
+      [3, 4],
+      [4, 5],
+    ]
+    const result = findMinArrowShots(points)
+    expect(result).toBe(2)
   })
 })
