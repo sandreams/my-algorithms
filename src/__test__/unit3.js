@@ -1,6 +1,7 @@
 const findContentChildren = require('../findContentChildren')
 const eraseOverlapIntervals = require('../eraseOverlapIntervals')
 const findMinArrowShots = require('../findMinArrowShots')
+const reconstructQueue = require('../reconstructQueue')
 
 describe('贪心策略', () => {
   it('输入: g = [10, 9, 8, 7], s = [5, 6, 7, 8]', () => {
@@ -82,5 +83,73 @@ describe('用最少数量的箭引爆气球', () => {
     ]
     const result = findMinArrowShots(points)
     expect(result).toBe(2)
+  })
+})
+
+describe('根据身高重建队列', () => {
+  it('输入：people = [[7,0],[4,4],[7,1],[5,0],[6,1],[5,2]]', () => {
+    const people = [
+      [7, 0],
+      [4, 4],
+      [7, 1],
+      [5, 0],
+      [6, 1],
+      [5, 2],
+    ]
+    const result = reconstructQueue(people)
+    expect(result).toEqual([
+      [5, 0],
+      [7, 0],
+      [5, 2],
+      [6, 1],
+      [4, 4],
+      [7, 1],
+    ])
+  })
+  it('输入：people = [[6,0],[5,0],[4,0],[3,2],[2,2],[1,4]]', () => {
+    const people = [
+      [6, 0],
+      [5, 0],
+      [4, 0],
+      [3, 2],
+      [2, 2],
+      [1, 4],
+    ]
+    const result = reconstructQueue(people)
+    expect(result).toEqual([
+      [4, 0],
+      [5, 0],
+      [2, 2],
+      [3, 2],
+      [1, 4],
+      [6, 0],
+    ])
+  })
+  it('输入：people = [[9,0],[7,0],[1,9],[3,0],[2,7],[5,3],[6,0],[3,4],[6,2],[5,2]]', () => {
+    const people = [
+      [9, 0],
+      [7, 0],
+      [1, 9],
+      [3, 0],
+      [2, 7],
+      [5, 3],
+      [6, 0],
+      [3, 4],
+      [6, 2],
+      [5, 2],
+    ]
+    const result = reconstructQueue(people)
+    expect(result).toEqual([
+      [3, 0],
+      [6, 0],
+      [7, 0],
+      [5, 2],
+      [3, 4],
+      [5, 3],
+      [6, 2],
+      [2, 7],
+      [9, 0],
+      [1, 9],
+    ])
   })
 })
